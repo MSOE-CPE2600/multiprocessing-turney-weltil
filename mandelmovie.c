@@ -6,6 +6,12 @@
 //  Converted to use jpg instead of BMP and other minor changes
 //  
 ///
+
+/*
+*Edited by: Larissa Welti
+*Course: CPE 2600 121
+*Assignment: Lab 11
+*/
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -76,16 +82,17 @@ int main( int argc, char *argv[] )
 		}
 	}
 
-
+	//generate 50 frames of varying scales 
     for(int i = 0; i < numFrames; i++){
 		if(numProcessors >= maxProcessors){
 			wait(NULL);
 			numProcessors--;
 		}
-		int pid = fork();
-        if(pid == 0){
+		int pid = fork();	
+        if(pid == 0){	//if child process
+
             if(i != 0){
-            xscale = xscale - (xscale/numFrames*i); 
+            xscale = xscale - (xscale/numFrames*i); //scale the image 
             }
             
             // Calculate y scale based on x scale (settable) and image sizes in X and Y (settable)
@@ -114,16 +121,17 @@ int main( int argc, char *argv[] )
             // free the mallocs
             freeRawImage(img);
 			exit(0);
-        } else if(pid > 0){
+        } else if(pid > 0){//if parent process
 			numProcessors++;
 		}
 
 		
     }
-	while(numProcessors > 0){
+	while(numProcessors > 0){	//while there are still children running
 			wait(NULL);
 			numProcessors--;
-		}
+	}
+
 	return 0;
 }
 

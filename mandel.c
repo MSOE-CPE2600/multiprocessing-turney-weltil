@@ -6,6 +6,12 @@
 //  Converted to use jpg instead of BMP and other minor changes
 //  
 ///
+
+/*
+*Edited by: Larissa Welti
+*Course: CPE 2600 121
+*Assignment: Lab 11
+*/
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
