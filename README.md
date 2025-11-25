@@ -18,6 +18,7 @@ As expected a run with only 1 child process runs the slowest with a time of over
 
 The program follows the same general flow as it did with multiproccessing. It gets command line arguments using getopt, then makes a process for every frame up to the max number of processors. For each frame the number of threads specified in the command line are created. Each thread has its own data array with the information needed to parse a segment of the frame's pixels. Each thread calculates the pixels from y = height*(thread#-1)/threadcount to y = height*thread#/threadcount. This allows every pixel to be calculated faster than it was with just one thread. After each frame is done the data and thread array's memory is freed to prevent memory leaks. 
 
+<img width="568" height="197" alt="image" src="https://github.com/user-attachments/assets/b352dd64-1cdb-4080-9e01-e59374cbe5d5" />
 
 
 ## Results Discussion
