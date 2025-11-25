@@ -1,4 +1,4 @@
-# System Programming Lab 11 Multiprocessing
+# System Programming Lab 11/12 Multiprocessing/MultiThreading
 #### Edited by: Larissa Welti
 #### Course: CPE 2600 121
 #### Assignment: Lab 11
@@ -11,3 +11,17 @@ My program first gets the command line arguments (using getopt) to determine wha
 ## Results Discussion
 
 As expected a run with only 1 child process runs the slowest with a time of over 80 seconds. Doubling the number of processes to 2 almost doubles the runtime. However as we continue to increase the number of processes we see an exponential decline in speed improvements with the minimum runtime sitting at about 13 seconds after 10 processes. 
+
+#### Assignment: Lab 12
+
+## Overview of the Implementation
+
+The program follows the same general flow as it did with multiproccessing. It gets command line arguments using getopt, then makes a process for every frame up to the max number of processors. For each frame the number of threads specified in the command line are created. Each thread has its own data array with the information needed to parse a segment of the frame's pixels. Each thread calculates the pixels from y = height*(thread#-1)/threadcount to y = height*thread#/threadcount. This allows every pixel to be calculated faster than it was with just one thread. After each frame is done the data and thread array's memory is freed to prevent memory leaks. 
+
+
+
+## Results Discussion
+
+As expected, adding more processors or more threads increases the speed of the program. The fastest it ran was with 20 processors and 20 threads, however it was essentially the same with 20 threads and 2, 5, 10, or 20 processors with minor deviations due to instantaneous system strain differences. Overall multithreading increases speed more than multiprocessing as the differences along the rows of the table are bigger than the differences along the columns. There is the exception of the row/column where we only increase one of these. I think that the reason multi-threading increases the speed more is because there are only actually so many processors on our computers and once you exceed that number there is no longer much gain in speed. 
+
+The sweet spot for ideal speed is between 5 and 20 processors and 5 and 20 threads. Below that number the times are all much lower and there are only minor differences in values within this range. 
